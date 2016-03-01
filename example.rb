@@ -27,8 +27,16 @@ class Example::Program
     canines = ['terrier', 'golden retriever', 'poodle']
     k = 2
     while k != 0
-      puts canines
+      puts canines[k + 4]
       k = k - 1
     end
+  end
+
+  def bang!
+    return true
+  end
+
+  def question?
+    return false
   end
 end

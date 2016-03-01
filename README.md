@@ -30,7 +30,7 @@ A simplified form of ruby where:
 
 6. Modify the parser to allow array accesses as expressions (e.g., cats[4], dogs[3])
 
-7. In `ruby_lexer.rb`, modify `function` to take params.
+7. Modify the parser and lexer to allow a function to take params
 
 
 ## Challenges (Tuesday March 15)

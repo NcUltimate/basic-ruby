@@ -7,7 +7,6 @@ if ARGV.count < 1
 else
   program = File.open(ARGV[0], 'r', &:read)
   parser = BasicRuby.new
-    parser.parse(program)
   begin
     parser.parse(program)
     puts "\n***    Nice Job! Your Program is valid!    ****\n\n"

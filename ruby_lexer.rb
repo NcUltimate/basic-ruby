@@ -20,6 +20,16 @@ class RubyLexer
           queue.push [:IF, $&]
         when /\Awhile\b/
           queue.push [:WHILE, $&]
+        when /\Auntil\b/
+          queue.push [:WHILE, 'while']
+          queue.push [:BANG, '!']
+        when /\Aunless\b/
+          queue.push [:IF, 'if']
+          queue.push [:BANG, '!']
+        when /\Atrue\b/
+          queue.push [:TRUE, $&]
+        when /\Afalse\b/
+          queue.push [:FALSE, $&]
         when /\Ado\b/
           queue.push [:DO, $&]
         when /\Aputs\b/
@@ -28,7 +38,7 @@ class RubyLexer
           queue.push [:STR, $&]
         when /\A[\d\.]+/
           queue.push [:NUM, $&]
-        when /\A\w+/
+        when /\A[a-z_]\w*/i
           queue.push [:VAR, $&]
         when /\A,/
           queue.push [:COMMA, $&]
@@ -42,12 +52,14 @@ class RubyLexer
           queue.push [:RPAREN, $&]
         when /\A(\+|\-|\/|\*)/
           queue.push [:OP, $&]
-        when /\A(\<|\>|==|!=)/
+        when /\A(\<|\>|>=|<=|==|!=)/
           queue.push [:BOOL, $&]
         when /\A=/
           queue.push [:EQUAL, $&]
         when /\A!/
           queue.push [:BANG, $&]
+        when /\A\?/
+          queue.push [:QMARK, $&]
         when /\A./
           queue.push [$&, $&]
         end

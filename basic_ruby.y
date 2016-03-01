@@ -13,8 +13,14 @@ rule
     function_list function
     | function
   function:
-    DEF VAR statement_list END
+    DEF VAR op_qmark_bang opt_param_list statement_list END
+  op_qmark_bang:
+   QMARK | BANG | /* nothing */
 
+  opt_param_list:
+    param_list | /* no params */
+  param_list:
+    LPAREN opt_list RPAREN
   statement_list:
     statement_list statement
     | statement
@@ -43,7 +49,9 @@ rule
     | LPAREN expression RPAREN
     | value 
   value:
-    NUM | STR | VAR | array
+    TRUE | FALSE | NUM | STR | VAR op_array_access| array
+  op_array_access:
+    LBRACE expression RBRACE | /* no array access */
   array:
     LBRACE opt_list RBRACE
   opt_list:
